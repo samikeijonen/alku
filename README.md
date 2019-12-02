@@ -7,8 +7,8 @@ In this presentation and repo, we’ll give examples how you can start building 
 - Markup
 - Stylesheet
 - Template files
-- Template hierarchy
 - The loop
+- Template hierarchy
 
 [Theme handbook](https://developer.wordpress.org/themes/getting-started/) is our reference site.
 
@@ -48,3 +48,48 @@ WordPress uses [header comment section](https://developer.wordpress.org/themes/b
 1. Theme Name
 1. Author
 1. Version
+
+## Replacing static content with the loop
+
+We only have static content at the moment in our theme. We need [The Loop](https://developer.wordpress.org/themes/basics/the-loop/) to output content from our database.
+
+Let's go back to our `index.php` file and update static content inside `<main>` with The Loop.
+
+```php
+<?php 
+if ( have_posts() ) : 
+    while ( have_posts() ) : the_post(); 
+        // Displays post content.
+        the_content();
+    endwhile; 
+endif; 
+?>
+```
+
+Cool, we have the content.
+
+## Organizing our theme structure by adding `header.php` and `footer.php` files
+
+It's a good practise to organize our theme structure and use smaller template files.
+
+1. Create `header.php` file.
+1. Create `footer.php` file.
+1. Cut top of the `index.php` file, and paste into the `header.php` file.
+1. Cut bottom of the `index.php` file, and paste into the `footer.php` file.
+1. Leave only `<main>` content inside `index.php`.
+
+Wait, we lost our static header and footer?!
+
+### Call get_header() and get_footer()
+
+- `get_header()` function includes `header.php` file.
+- `get_footer()` function includes `footer.php` file.
+
+### Add wp_head() and wp_footer() hooks
+
+Lot's of the site functionality happens in hooks called `wp_head()` and `wp_footer()`. Let's add
+
+- `wp_head()` just inside `</head>`.
+- `wp_footer()` just inside `</body>`.
+
+Refresh your page and we can see that most of the block are styled now. This is because WP Core block stylesheet is added via `wp_head()` hook.
