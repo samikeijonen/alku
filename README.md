@@ -49,6 +49,16 @@ WordPress uses [header comment section](https://developer.wordpress.org/themes/b
 1. Author
 1. Version
 
+I'll go with:
+
+```
+/**
+ * Theme Name: Alku
+ * Author: Sami Keijonen
+ * Version: 1.0.0
+ */
+```
+
 ## Replacing static content with the loop
 
 We only have static content at the moment in our theme. We need [The Loop](https://developer.wordpress.org/themes/basics/the-loop/) to output content from our database.
