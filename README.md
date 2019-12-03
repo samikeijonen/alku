@@ -123,3 +123,69 @@ Let's do that in `functions.php` file:
 // enqueue our main `style.css`.
 wp_enqueue_style( 'style', get_stylesheet_uri(), [], '1.0.0' );
 ```
+
+## Register dynamic menu and display on the site
+
+At the moment we have hard coded menu in the `header.php`. First, we need to [register new menu location using `register_nav_menus()` function](https://developer.wordpress.org/themes/functionality/navigation-menus/).
+
+Remember where we added functionality, yep, in `functions.php`.
+
+```php
+function alku_register_my_menus() {
+    register_nav_menus(
+        array(
+            'primary' => esc_html__( 'Header Menu', 'alku' ),
+            )
+        );
+ }
+ add_action( 'init', 'alku_register_my_menus' );
+ ```
+
+Now we can see new menu location called `Header Menu` but it doesn't show up automatically in our site.
+
+Let's replace our static navigation in `header.php` with `wp_nav_menu()` function.
+
+```php
+wp_nav_menu(
+    array(
+        'theme_location' => 'primary'
+    )
+);
+```
+
+Done, we now have dynamic menu.
+
+## Template hierarchy
+
+What if we need different output on pages and articles? What about archive pages?
+
+This is where [Template hierarchy](https://developer.wordpress.org/themes/basics/template-hierarchy/) steps in. WordPress knows which template files to load based on the file name and "view" what we are looking.
+
+At the moment we only have `index.php` file which sits at the bottom of the template hierarchy. If nothing else is found, `index.php` is used.
+
+### Create template file `page.php`
+
+You might guess that `page.php` is template file for Pages. Let's create that file by copying `index.php`.
+
+### Create template file `single.php`
+
+`single.php` is template file is used for Posts. Let's create that file by copying `index.php`.
+
+### Add title
+
+There are many [template tags](https://developer.wordpress.org/themes/basics/template-tags/) in WordPress which we use to retrieve content from our database.
+
+Let's add `the_title()` template tag in `page.php` and `single.php` to display our page title.
+
+### Add date in the posts
+
+We can use [get_the_date](https://developer.wordpress.org/reference/functions/get_the_date/) for displaying post published date.
+
+So we need to add this to posts, which template file is that?
+
+Correct, let's add it in `single.php`:
+
+```php
+<time><?php echo get_the_date(); ?></time>
+```
+

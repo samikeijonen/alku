@@ -19,9 +19,12 @@
 <body>
 	<header>
 		<nav>
-			<ul>
-				<li><a href="#">Home</a></li>
-				<li><a href="#">About</a></li>
-			</ul>
+		<?php
+			wp_nav_menu(
+				array(
+					'theme_location' => 'primary',
+				)
+			);
+		?>
 		</nav>
 	</header>
