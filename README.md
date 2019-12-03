@@ -92,4 +92,17 @@ Lot's of the site functionality happens in hooks called `wp_head()` and `wp_foot
 - `wp_head()` just inside `</head>`.
 - `wp_footer()` just inside `</body>`.
 
-Refresh your page and we can see that most of the block are styled now. This is because WP Core block stylesheet is added via `wp_head()` hook.
+Refresh your page and we can see that most of the blocks are styled now. This is because WP Core block stylesheet is added via `wp_head()` hook.
+
+## Add functions.php file for theme functionality
+
+[WordPress loads `functions.php`](https://developer.wordpress.org/themes/basics/theme-functions/) file automatically which makes it good place
+for adding theme related functionality.
+
+Let's create `functions.php` file in to root of our theme.
+
+## Load our `style.css` file
+
+Remember that we needed `style.css` file where we can add our CSS? That's not actually used in the site yet.
+
+We need to [enqueu our styles using `wp_enqueue_style()` function](https://developer.wordpress.org/themes/basics/including-css-javascript/).
