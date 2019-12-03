@@ -189,3 +189,22 @@ Correct, let's add it in `single.php`:
 <time><?php echo get_the_date(); ?></time>
 ```
 
+## Cleaning up
+
+We still have static data in couple of pages.
+
+1. In `header.php` add correct `language_attributes()` inside `<html>`.
+1. In `header.php` remove hard coded `<title>My site</title>`.
+1. We'll add it back in in next section.
+
+## Adding title theme support, or other theme supports
+
+Let's go back to our `functions.php` file. We already use so called `init` hook to register our menu.
+
+This time we'll create `after_setup_theme` hook. And inside it we'll use `add_theme_support( 'title-tag' )` to manage the document title for us.
+
+### Hooks
+
+[Action Hooks](https://developer.wordpress.org/plugins/hooks/) are ways to add data or perform a task. Different hooks run at a specific point in the execution of WordPress.
+
+Using hooks also helps organize `functions.php` file.
