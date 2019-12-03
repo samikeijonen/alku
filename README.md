@@ -116,3 +116,10 @@ Let's create `functions.php` file in to root of our theme.
 Remember that we needed `style.css` file where we can add our CSS? That's not actually used in the site yet.
 
 We need to [enqueu our styles using `wp_enqueue_style()` function](https://developer.wordpress.org/themes/basics/including-css-javascript/).
+
+Let's do that in `functions.php` file:
+
+```php
+// enqueue our main `style.css`.
+wp_enqueue_style( 'style', get_stylesheet_uri(), [], '1.0.0' );
+```
