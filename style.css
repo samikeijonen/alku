@@ -4,6 +4,493 @@
  * Version: 1.0.0
  */
 
+/**
+ * Main stylesheet for the theme.
+ *
+ * Theme styles follow http://cssguidelin.es/ and are organized according to
+ * Inverted Triangle CSS (ITCSS) principles put forth by Harry Roberts. In
+ * short, each layer of CSS gets more specific as you move down this page.
+ */
+
+/*--------------------------------------------------------------
+# Settings - Global variables, config switches.
+--------------------------------------------------------------*/
+
+:root {
+	/* Screens. */
+	--screen-md: 56em;
+	--screen-lg: 66em;
+
+	/* Colors. */
+	--primary-hue: 235;
+	--color-primary-hsl: var(--primary-hue), 45%, 50%;
+	--color-primary: hsl(var(--color-primary-hsl));
+	--color-primary-100: hsl(var(--primary-hue), 10%, 10%);
+	--color-primary-300: hsl(var(--primary-hue), 8%, 20%);
+	--color-primary-500: var(--color-primary);
+	--color-primary-700: hsl(var(--primary-hue), 90%, 25%);
+	--color-primary-800: hsl(var(--primary-hue), 95%, 10%);
+	--color-primary-900: hsl(var(--primary-hue), 100%, 5%);
+
+	--color-grey: hsl(0, 0%, 44%);
+	--color-grey-100: hsl(var(--primary-hue), 5%, 90%);
+	--color-grey-300: hsl(0, 0%, 75%);
+	--color-grey-500: var(--color-grey);
+	--color-grey-700: hsl(0, 0%, 29%);
+
+	--color-white: hsl(0, 0%, 100%);
+	--color-black: hsl(0, 0%, 0%);
+
+	--color-primary-shadow: hsla(var(--color-primary-hsl), 0.75);
+
+	/* Font families. */
+	--font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif;
+
+	/* Font sizes. */
+	--font-size-sm: 0.875rem;
+	--font-size-md: 1rem;
+	--font-size-lg: 1.125rem;
+	--font-size-xl: 1.25rem;
+	--font-size-2xl: 1.5rem;
+	--font-size-3xl: 2rem;
+	--font-size-4xl: 2rem;
+
+	@media (min-width: --screen-md) {
+		--font-size-xl: 1.5rem;
+		--font-size-2xl: 2rem;
+		--font-size-3xl: 2.5rem;
+		--font-size-4xl: 3rem;
+	}
+
+	/* Line heights. */
+	--line-height-sm: 1.25;
+	--line-height-md: 1.5;
+
+	/* Max widths. */
+	--max-w-md: 46rem;
+	--max-w-lg: 65rem;
+	--max-w-xl: 78rem;
+	--max-w-2xl: 120rem;
+
+	/* Spacing. */
+	--spacing-0: 0;
+	--spacing-sm: 4px;
+	--spacing: 0.5rem;
+	--spacing-2x: 1rem;
+	--spacing-3x: 1.5rem;
+	--spacing-4x: 2rem;
+	--spacing-4x: 2rem;
+	--spacing-5x: 2.5rem;
+	--spacing-6x: 3rem;
+	--spacing-7x: 3.5rem;
+	--spacing-8x: 4rem;
+	--spacing-9x: 4.5rem;
+	--spacing-10x: 5rem;
+	--spacing-11x: 5.5rem;
+	--spacing-12x: 6rem;
+
+	/* Transitions. */
+	--transition-duration-md: 250ms;
+}
+
+/*--------------------------------------------------------------
+# Generic - Ground-zero styles (resets, box-sizing, etc.).
+--------------------------------------------------------------*/
+
+body {
+	line-height: 1.5;
+	min-height: 100vh;
+	scroll-behavior: smooth;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+
+/* Remove default margin. */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd,
+code,
+pre {
+	margin: 0;
+}
+
+
+/*
+ * Remove the gap between audio, canvas, iframes,
+ * images, videos and the bottom of their containers:
+ * https://github.com/h5bp/html5-boilerplate/issues/440
+ */
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+	vertical-align: middle;
+}
+
+img {
+	max-width: 100%;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+fieldset {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+textarea {
+	resize: vertical;
+}
+
+:focus {
+	outline: 1px dotted;
+}
+
+html {
+	box-sizing: border-box;
+}
+
+/**
+ * Inherit box-sizing to make it easier to change the property
+ * for components that leverage other behavior.
+ */
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+/*--------------------------------------------------------------
+# Elements - Unclassed HTML elements (type selectors).
+--------------------------------------------------------------*/
+
+body {
+	background-color: var(--color-primary-100);
+	color: var(--color-grey-100);
+	font-family: var(--font-family);
+	font-size: var(--font-size-xl);
+	line-height: var(--line-height-md);
+	padding-left: var(--spacing-2x);
+	padding-right: var(--spacing-2x);
+}
+
+/* Headings. */
+h1,
+h2,
+h3,
+h4 {
+	color: var(--color-white);
+}
+
+h1 {
+	font-size: var(--font-size-3xl);
+	line-height: var(--line-height-sm);
+}
+
+h2 {
+	font-size: var(--font-size-2xl);
+	line-height: var(--line-height-sm);
+}
+
+/* Links. */
 a {
-	color: #222;
+	color: var(--color-grey-100);
+}
+
+a:hover,
+a:focus,
+a:active {
+	color: var(--color-white);
+}
+
+/* Blockquote. */
+blockquote {
+	border-inline-start: var(--spacing-sm) solid;
+	font-size: var(--font-size-2xl);
+	padding-inline-start: var(--spacing-2x);
+}
+
+/* Tables. */
+table {
+	border-collapse: separate;
+	border-spacing: 0;
+	width: 100%;
+}
+
+th,
+td {
+	padding: var(--spacing);
+	text-align: left;
+}
+
+table tr:nth-child(2n) {
+	background-color: var(--color-primary-100);
+}
+
+/* Forms.*/
+button,
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+input[type="number"],
+input[type="tel"],
+input[type="range"],
+input[type="date"],
+input[type="month"],
+input[type="week"],
+input[type="time"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="color"],
+textarea,
+select {
+	background-color: var(--color-primary-300);
+	border: 2px solid var(--color-primary-300);
+	border-radius: var(--spacing-sm);
+	color: var(--color-white);
+	padding: var(--spacing);
+	transition: all var(--transition-duration-md) easy-in-out;
+	width: 100%;
+}
+
+button:focus,
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus,
+input[type="number"]:focus,
+input[type="tel"]:focus,
+input[type="range"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="week"]:focus,
+input[type="time"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="color"]:focus,
+textarea:focus,
+select:focus {
+	border-color: var(--color-white);
+	box-shadow: 0 0 var(--spacing-sm) var(--color-primary-shadow);
+	/* Use transparent outline for Windows high contrast mode. */
+	outline: 2px solid transparent;
+}
+
+label {
+	font-weight: 500;
+}
+
+/* Buttons. */
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+	background-color: var(--color-primary);
+	border: none;
+	border-radius: var(--spacing-sm);
+	color: var(--color-white);
+	font-weight: 500;
+	padding: var(--spacing-2x) var(--spacing-5x);
+	transition: all var(--transition-duration-md) easy-in-out;
+}
+
+button:hover,
+input[type="button"]:hover,
+input[type="reset"]:hover,
+input[type="submit"]:hover {
+	cursor: pointer;
+	transform: translateY(-1px);
+}
+
+button:focus,
+input[type="button"]:focus,
+input[type="reset"]:focus,
+input[type="submit"]:focus {
+	border-color: var(--color-primary);
+	box-shadow: 0 0 var(--spacing-sm) var(--color-primary-shadow);
+	/* Use transparent outline for Windows high contrast mode. */
+	outline: 2px solid transparent;
+	transform: translateY(-1px);
+}
+
+/* Pre/Code. */
+pre {
+	background-color: var(--color-grey-100);
+	font-family: var(--font-family-mono);
+	max-width: 100%;
+	overflow: auto;
+	padding: var(--spacing-4x);
+}
+
+
+/*--------------------------------------------------------------
+# Objects - Undecorated design patterns.
+--------------------------------------------------------------*/
+
+header,
+main {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: var(--max-w-md);
+
+	/* Natural flow and rhythm in articles by default */
+	--flow-space: var(--spacing-4x);
+}
+
+header {
+	padding-bottom: var(--spacing-5x);
+	padding-top: var(--spacing-5x);
+}
+
+main > * + * {
+	margin-top: var(--flow-space);
+}
+
+.grid {
+	display: grid;
+	grid-gap: 2rem;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+footer {
+	padding-bottom: var(--spacing-5x);
+	padding-top: var(--spacing-5x);
+	text-align: center;
+}
+
+
+/*--------------------------------------------------------------
+# Components - specific UI components.
+--------------------------------------------------------------*/
+
+/* Main nav. */
+nav ul {
+	display: flex;
+	flex-wrap: wrap;
+	list-style-type: none;
+	margin: 0;
+	padding-left: 0;
+}
+
+nav li {
+	margin-right: var(--spacing-3x);
+}
+
+/* Buttons */
+.button--light {
+	background-color: var(--color-white);
+}
+
+.wp-block-button,
+.wp-block-button.is-style-outline {
+	color: var(--color-white);
+}
+
+
+/*--------------------------------------------------------------
+# Utilities - Helpers and overrides.
+--------------------------------------------------------------*/
+
+/*
+* Hide only visually, but have it available for screen readers:
+* https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+*
+* 1. For long content, line feeds are not interpreted as spaces and small width
+*    causes content to wrap 1 word per line:
+*    https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
+*/
+.screen-reader-text {
+	border: 0;
+	clip: rect(0, 0, 0, 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+	/* 1 */
+}
+
+/*
+* Extends the .sr-only class to allow the element
+* to be focusable when navigated to via the keyboard:
+* https://www.drupal.org/node/897638
+*/
+.sr-only.focusable:active,
+.sr-only.focusable:focus {
+	clip: auto;
+	height: auto;
+	margin: 0;
+	overflow: visible;
+	position: static;
+	white-space: inherit;
+	width: auto;
+}
+
+/*
+* Hide visually and from screen readers, but maintain layout
+*/
+.invisible {
+	visibility: hidden;
+}
+
+/* Paddings and margins. */
+.px-2 {
+	padding-left: var(--spacing-2x);
+	padding-right: var(--spacing-2x);
+}
+
+.py-6 {
+	padding-bottom: var(--spacing-6x);
+	padding-top: var(--spacing-6x);
+}
+
+.mx-auto {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.max-w-md {
+	max-width: var(--max-w-md);
+}
+
+/*
+ * Resources on prefers-reduced-motion:
+ * https://webkit.org/blog-files/prefers-reduced-motion/prm.htm
+ * https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion
+ */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.001s !important;
+		scroll-behavior: auto !important;
+		transition-duration: 0.001s !important;
+	}
 }
