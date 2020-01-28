@@ -22,7 +22,6 @@ function alku_register_my_menus() {
 }
 add_action( 'init', 'alku_register_my_menus' );
 
-
 /**
  * Add supports for theme.
  *
